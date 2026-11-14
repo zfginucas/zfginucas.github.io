@@ -16,14 +16,13 @@ Do not open `index.html` directly with `file://`; the language toggle and projec
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Page structure and Chinese default copy |
-| `data.js` | Bilingual copy (`I18N`) and project cards (`PROJECTS`) |
-| `styles.css` | Dark theme, layout, responsive rules |
-| `main.js` | Language switch, project filter, scroll reveal, nav, copy email |
+| `index.html` | Page structure and default English copy |
+| `data.js` | Bilingual copy (`COPY`) and project records (`PROJECTS`) |
+| `styles.css` | Light academic layout, responsive rules, accessibility, print styles |
+| `main.js` | Language preference, project filters and details, navigation, copy email |
 | `assets/favicon.svg` | Favicon |
-| `assets/og.png` | 1200×630 social preview image |
-| `assets/portrait.jpg` | Hero portrait (cropped from the resume) |
-| `assets/avatar.jpg` | Square avatar used in the nav |
+| `assets/social-preview.png` | 1200×630 social preview image |
+| `assets/portrait.jpg` | Profile illustration |
 | `assets/Thomas-Zhao-Resume.pdf` | Downloadable CV |
 
 To add a project, append an object to `PROJECTS` in `data.js`:
@@ -31,14 +30,11 @@ To add a project, append an object to `PROJECTS` in `data.js`:
 ```js
 {
   id: "my-project",
-  category: "agents",          // all | agents | llm | systems | web3
-  title: { zh: "项目名", en: "Project name" },
-  subtitle: { zh: "一句话副标题", en: "One-line subtitle" },
-  desc: { zh: "两行描述", en: "Two-line description" },
-  tags: ["Tag", "Tag"],
-  metric: { zh: "关键结果", en: "Key result" },
-  status: { zh: "进行中", en: "Ongoing" },
-  link: "https://github.com/..."
+  category: "agents",          // agents | llm | systems
+  diagram: "agents",           // agents | alignment | operator | robot | risk | web
+  en: { title: "Project name", meta: "RESEARCH PROJECT", description: "Summary", details: "Details" },
+  zh: { title: "项目名", meta: "研究项目", description: "简述", details: "详细介绍" },
+  url: "https://github.com/..." // optional; omit for projects without public code
 }
 ```
 
@@ -56,5 +52,9 @@ The `.nojekyll` file disables Jekyll processing.
 ## Notes
 
 - No phone number is published. Contact is email + GitHub only.
-- The page is bilingual; the choice is persisted in `localStorage` under `thomas-site-lang`.
+- English is the default language; visitors can switch to Chinese. The preference is persisted in `localStorage` under `thomas-academic-language`.
+- Three selected projects appear initially. Category filters and the expand button provide access to all six projects.
+- Research projects are not presented as publications.
 - All animations respect `prefers-reduced-motion`.
+
+The previous design is retained in Git history at commit `b4e531bb4b10ca18ada359e6800af309bab16de0`.
